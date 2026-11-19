@@ -21,7 +21,7 @@ export const metadata = {
   description: t("meta.description", { name: site.name }),
 };
 
-// Define o tema antes da primeira pintura: escolha salva > configuração do site (sistema ou horário)
+
 const themeScript = `(function(){try{var d=document.documentElement,t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){var m=${JSON.stringify(site.theme.default)};if(m==="auto-time"){var h=new Date().getHours();t=(h>=${Number(site.theme.darkFrom)}||h<${Number(site.theme.darkUntil)})?"dark":"light"}else if(m==="dark"||m==="light"){t=m}else{t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}}d.dataset.theme=t}catch(e){}})();`;
 
 export default async function RootLayout({ children }) {
@@ -33,8 +33,6 @@ export default async function RootLayout({ children }) {
     readSession(),
   ]);
 
-  // Login: Customer Account API (OAuth), que devolve o cliente para ESTE site.
-  // Sem client id configurado, o ícone abre /account (que explica a configuração) e nunca o tema da Shopify.
   const account = {
     loggedIn: session.loggedIn,
     name: session.name,

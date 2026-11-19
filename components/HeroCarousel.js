@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { t } from "@/lib/i18n";
 import { site } from "@/site.config";
 
-// Capa em carrossel: selo, título (última palavra em verde), texto, botão e a imagem (tamanho fixo por dispositivo, via CSS)
+
 export default function HeroCarousel({ slides, interval = 6000 }) {
   const [i, setI] = useState(0);
   const [hover, setHover] = useState(false);
@@ -87,13 +87,7 @@ export default function HeroCarousel({ slides, interval = 6000 }) {
       {count > 1 && (
         <>
           <div className="hero-ui">
-            <button className="hero-pause" onClick={() => setUserPaused((p) => !p)} aria-label={userPaused ? t("hero.play") : t("hero.pause")}>
-              {userPaused ? (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
-              ) : (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" /></svg>
-              )}
-            </button>
+       
             <div className="hero-dots">
               {slides.map((s, k) => (
                 <button key={s.href + k} className={k === i ? "is-on" : ""} aria-label={t("hero.goto", { name: `${s.line1} ${s.line2}`.trim() })} aria-current={k === i} onClick={() => go(k)} />

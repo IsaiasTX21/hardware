@@ -7,7 +7,7 @@ import { useCart } from "./CartProvider";
 import ThemeToggle from "./ThemeToggle";
 import { plural, t } from "@/lib/i18n";
 
-export default function Header({ name, nav, account, helpHref, announcement }) {
+export default function Header({ nav, account, helpHref, announcement }) {
   const { count, openCart } = useCart();
   const router = useRouter();
   const path = usePathname();
@@ -30,8 +30,8 @@ export default function Header({ name, nav, account, helpHref, announcement }) {
       const links = Array.from(navEl.children);
       const navGap = parseFloat(getComputedStyle(navEl).columnGap) || 0;
       const navW = links.reduce((n, el) => n + el.offsetWidth, 0) + navGap * Math.max(0, links.length - 1);
-      const iconsW = Array.from(icons.children).reduce((n, el) => n + el.offsetWidth, 0) + rem; // + espaços
-      const searchW = rem * 10.3 + 18; // busca no layout de uma linha (input de 8rem)
+      const iconsW = Array.from(icons.children).reduce((n, el) => n + el.offsetWidth, 0) + rem;
+      const searchW = rem * 10.3 + 18; 
       const side = Math.max(brand.offsetWidth, searchW + iconsW + rem * 0.5);
       setCompact(2 * side + navW + 2 * 1.5 * rem > avail);
     };
@@ -64,7 +64,7 @@ export default function Header({ name, nav, account, helpHref, announcement }) {
       )}
 
       <header ref={headerRef} className={`header ${compact ? "is-compact" : ""}`}>
-        <Link href="/" className="brand" ref={brandRef}>{name}</Link>
+        <Link href="/" className="brand" ref={brandRef}>Hardware evolution</Link>
 
         <nav className="nav" ref={navRef} aria-label={t("nav.main")}>
           <Link href="/" className={isActive("/") ? "is-active" : ""}>{t("nav.home")}</Link>
@@ -85,7 +85,7 @@ export default function Header({ name, nav, account, helpHref, announcement }) {
           <div className="header-icons" ref={iconsRef}>
           <ThemeToggle />
 
-          {/* <a> comum: a rota de login faz redirecionamento e não deve ser pré-carregada */}
+          
           <a className={`icon-btn ${account.loggedIn ? "is-on" : ""}`} href={account.href} aria-label={accountLabel} title={accountLabel}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
               <circle cx="12" cy="8" r="4" /><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6" />
